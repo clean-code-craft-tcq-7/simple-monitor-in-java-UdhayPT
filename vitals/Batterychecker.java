@@ -14,12 +14,16 @@ public class Batterychecker {
     	boolean socFlag = isSOCinRange(soc);
     	boolean chargeRateFlag = isChargeRateInRange(chargeRate);
     	
-        if(!tempFlag || !socFlag || !chargeRateFlag) {  	
+        if(!isParamsInRange(tempFlag, socFlag, chargeRateFlag)) {  	
         	printError(tempFlag);
             return false;
         }
         return true;
     }
+
+	private static boolean isParamsInRange(boolean tempFlag, boolean socFlag, boolean chargeRateFlag) {
+		return tempFlag && socFlag && chargeRateFlag;
+	}
 
 	private static void printError(boolean tempFlag) {
 		
