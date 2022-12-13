@@ -9,27 +9,40 @@ public class Batterychecker {
 	float chargeRateUpperRange = 0.8f;
 	
     public static boolean batteryIsOk(float temperature, float soc, float chargeRate) {
-        if(!isTempInRange(temperature)) {
-            System.out.println("Temperature is out of range!");
-            return false;
-        } else if(!isSOCinRange(soc)) {
-            System.out.println("State of Charge is out of range!");
-            return false;
-        } else if(!isChargeRateInRange(chargeRate)) {
-            System.out.println("Charge Rate is out of range!");
+    	
+    	boolean tempFlag = isTempInRange(temperature);
+    	boolean socFlag = isSOCinRange(soc);
+    	boolean chargeRateFlag = isChargeRateInRange(chargeRate);
+    	
+        if(!tempFlag || !socFlag || !chargeRateFlag) {  	
+        	printError(tempFlag);
             return false;
         }
         return true;
     }
 
+	private static void printError(boolean tempFlag) {
+		
+		if (!tempFlag) {
+			System.out.println("Temperature is out of range!");
+		} else {
+			System.out.println("State of Charge is out of range!");
+		}
+		
+	}
+
 	public static boolean isChargeRateInRange(float chargeRate) {
 		Batterymodel batterymodel = new Batterymodel();
-		return chargeRate < batterymodel.getChargeRateUpperRange();
+		if (chargeRate < batterymodel.getChargeRateUpperRange()) {
+			return true;
+		}
+		System.out.println("Charge Rate is out of range!");
+		return false;
 	}
 
 	public static boolean isSOCinRange(float soc) {
 		Batterymodel batterymodel = new Batterymodel();
-		return !(soc < batterymodel.getSocLowerRange() || soc > batterymodel.getSocUpperRange());
+		return (batterymodel.getSocLowerRange() < soc && soc < batterymodel.getSocUpperRange());
 	}
 
 	public static boolean isTempInRange(float temperature) {
