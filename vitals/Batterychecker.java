@@ -2,12 +2,6 @@ package vitals;
 
 public class Batterychecker {
 	
-	float temperatureLowerRange = 0.0f;
-	float temperatureUpperRange = 45.0f;
-	float socLowerRange = 20.0f;
-	float socUpperRange = 80.0f;
-	float chargeRateUpperRange = 0.8f;
-	
     public static boolean batteryIsOk(float temperature, float soc, float chargeRate) {
     	
     	boolean tempFlag = isTempInRange(temperature);
@@ -18,6 +12,7 @@ public class Batterychecker {
         	printError(tempFlag);
             return false;
         }
+        Batterywarnings.printWarning(temperature, soc, chargeRate);
         return true;
     }
 

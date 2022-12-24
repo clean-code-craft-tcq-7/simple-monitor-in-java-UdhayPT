@@ -7,6 +7,11 @@ class BatterycheckerTest {
 	@Test
 	void testBatteryIsOk() {
 		assert(Batterychecker.batteryIsOk(25, 70, 0.7f) == true);
+		assert(Batterychecker.batteryIsOk(43, 70, 0.7f) == true);
+		assert(Batterychecker.batteryIsOk(2, 70, 0.7f) == true);
+		assert(Batterychecker.batteryIsOk(25, 23, 0.7f) == true);
+		assert(Batterychecker.batteryIsOk(25, 77, 0.7f) == true);
+		assert(Batterychecker.batteryIsOk(25, 70, 0.77f) == true);
 		assert(Batterychecker.batteryIsOk(25, 90, 0.7f) == false);
 		assert(Batterychecker.batteryIsOk(25, 70, 0.9f) == false);
         assert(Batterychecker.batteryIsOk(50, 85, 0.0f) == false);
