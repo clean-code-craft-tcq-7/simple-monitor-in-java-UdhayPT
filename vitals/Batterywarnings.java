@@ -1,6 +1,8 @@
 package vitals;
 
 public class Batterywarnings {
+	
+	static Messagelogger messagelogger = new Messagelogger();
 
 	public static void printWarning(float temperature, float soc, float chargeRate) {
 		Batterywarningmodel batterywarningmodel = new Batterywarningmodel();
@@ -12,24 +14,24 @@ public class Batterywarnings {
 	
 	private static void printChargeRateWarning(float chargeRate, Batterywarningmodel batterywarningmodel) {
 		if(chargeRate >= batterywarningmodel.getChargeRateUpperWarning()) {
-			System.out.println("High Charge Rate Warning");
+			System.out.println(messagelogger.print_language("high_charge_rate_warn"));
 		}
 		
 	}
 
 	private static void printSOCWarning(float soc, Batterywarningmodel batterywarningmodel) {
 		if(soc >= batterywarningmodel.getSocUpperWarning()) {
-			System.out.println("High SOC Warning");
+			System.out.println(messagelogger.print_language("high_soc_warn"));
 		} else if (soc < batterywarningmodel.getSocLowerWarning()) {
-			System.out.println("Low SOC Warning");
+			System.out.println(messagelogger.print_language("low_soc_warn"));
 		}	
 	}
 
 	private static void printTempWarning(float temperature, Batterywarningmodel batterywarningmodel) {
 		if(temperature >= batterywarningmodel.getTempUpperWarning()) {
-			System.out.println("High Temperature Warning");
+			System.out.println(messagelogger.print_language("high_temp_warn"));
 		} else if (temperature < batterywarningmodel.getTempLowerWarning()) {
-			System.out.println("Low Temperature Warning");
+			System.out.println(messagelogger.print_language("low_temp_warn"));
 		}	
 	}
 

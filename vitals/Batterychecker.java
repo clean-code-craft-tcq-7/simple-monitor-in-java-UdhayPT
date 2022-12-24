@@ -2,6 +2,8 @@ package vitals;
 
 public class Batterychecker {
 	
+	static Messagelogger messagelogger = new Messagelogger();
+	
     public static boolean batteryIsOk(float temperature, float soc, float chargeRate) {
     	
     	boolean tempFlag = isTempInRange(temperature);
@@ -23,9 +25,9 @@ public class Batterychecker {
 	private static void printError(boolean tempFlag) {
 		
 		if (!tempFlag) {
-			System.out.println("Temperature is out of range!");
+			System.out.println(messagelogger.print_language("temp_out_of_range"));
 		} else {
-			System.out.println("State of Charge is out of range!");
+			System.out.println(messagelogger.print_language("soc_out_of_range"));
 		}
 		
 	}
@@ -35,7 +37,7 @@ public class Batterychecker {
 		if (chargeRate < batterymodel.getChargeRateUpperRange()) {
 			return true;
 		}
-		System.out.println("Charge Rate is out of range!");
+		System.out.println(messagelogger.print_language("cr_out_of_range"));
 		return false;
 	}
 
